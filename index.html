@@ -8,7 +8,17 @@
         margin: 0;
       }
     </style>
+    <link rel="preload" href="./fontLoader.css" as="font-loader" type="font/ttf" />
     <script type="module" src="/src/index.ts"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+    <script>
+      window.WebFont = WebFont;
+      WebFont.load({
+        custom: {
+            families: [ 'CustomFont']
+        }
+      });
+    </script>
   </head>
   <body>
     <div id="game"></div>
