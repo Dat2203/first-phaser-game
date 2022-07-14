@@ -3,23 +3,22 @@
   <head>
     <title>Phaser 3 TypeScript Starter</title>
     <meta charset="utf-8" />
-    <link
-      rel="preload"
-      as="font"
-      href="/assets/font/SFPixelate.ttf"
-      type="font/ttf"
-    />
     <style>
       body {
         margin: 0;
       }
-      @font-face {
-        font-family: CustomFont;
-        src: url("/assets/font/SFPixelate.ttf");
-      }
     </style>
-    <!-- <style media="screen" type="text/css"></style> -->
+    <link rel="preload" href="./fontLoader.css" as="font-loader" type="font/ttf" />
     <script type="module" src="/src/index.ts"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+    <script>
+      window.WebFont = WebFont;
+      WebFont.load({
+        custom: {
+            families: [ 'CustomFont']
+        }
+      });
+    </script>
   </head>
   <body>
     <div id="game"></div>
