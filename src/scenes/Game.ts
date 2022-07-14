@@ -150,7 +150,7 @@ export default class Demo extends Phaser.Scene {
     scoreText = new Phaser.GameObjects.Text(this,0,0, this.score.toString(),{fontFamily: 'CustomFont', fontSize :"25px"}).setPosition(0,20)
     gameOVer = this.add.container(this.scale.width/2, this.scale.height/2,[ gameOverDisplay,gameOverReplayBtn,scoreText]).setVisible(false)
     
-    diamond = this.physics.add.sprite()
+    // diamond = this.physics.add.sprite()
 
   
 
