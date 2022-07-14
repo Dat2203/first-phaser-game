@@ -36,6 +36,7 @@ export default class Demo extends Phaser.Scene {
   preload() {
 
     this.load.image("ground", "assets/ground.png");
+    const load = this.load
 
     //noon background
     this.load.image("sunset-land", "assets/sunset/sunset_land.png");
@@ -66,10 +67,10 @@ export default class Demo extends Phaser.Scene {
       frameHeight: 180,
     });
     this.load.spritesheet("dino-down", "assets/dino_ducking.png", {
-      frameWidth: 20,
-      frameHeight: 180,
+      frameWidth: 150,
+      frameHeight: 92,
     });
-    this.load.spritesheet("replay_gameover", "assets/replay_over.png",{frameWidth:70,frameHeight:110})
+    this.load.spritesheet("replay_gameover", "assets/replay_over.png",{frameWidth:92,frameHeight:38})
   }
 
   create() {
@@ -111,13 +112,6 @@ export default class Demo extends Phaser.Scene {
 
 
 
-
-    const loop=  this.time.addEvent({
-      callback: this.updateScore,
-      callbackScope: this,
-      delay: 1000, // 1000 = 1 second
-      loop: true
-  });
    
     //create animation objects
     this.anims.create({
@@ -197,7 +191,7 @@ export default class Demo extends Phaser.Scene {
     if (cursors.up.isDown && player.body.touching.down) {
       player.setVelocityY(-350);
     }
-    if (cursors.down.isDown) {
+    if (cursors.down.isDown && player.body  ) {
       player.setVelocityX(0);
       player.play("dino-ducking-anims", true);
     } else {
