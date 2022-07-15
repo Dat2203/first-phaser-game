@@ -62,12 +62,19 @@ export default class Demo extends Phaser.Scene {
       frameHeight: 180,
     });
     this.load.spritesheet("dino-down", "assets/dino_ducking.png", {
-      frameWidth: 20,
-      frameHeight: 180,
+      frameWidth: 150,
+      frameHeight: 92,
     });
     this.load.spritesheet("replay_gameover", "assets/replay_over.png", {
-      frameWidth: 70,
-      frameHeight: 110,
+      frameWidth: 92,
+      frameHeight: 38,
+    });
+    const image = document.createElement("img");
+    image.src = "assets/dino_ducking.png";
+
+    const texture = this.textures.addSpriteSheet("ducking", image, {
+      frameWidth: 150,
+      frameHeight: 92,
     });
   }
 
@@ -126,13 +133,6 @@ export default class Demo extends Phaser.Scene {
     // const scoreText = new Phaser.GameObjects.Text(this,0,0, this.score.toString(),{fontFamily: 'CustomFont'}).setPosition(10,30).setFill("#0000");
     // gameOVer = this.add.container(this.scale.width/2, this.scale.height/2,[ gameOverDisplay,gameOverReplayBtn,scoreText])
 
-    const loop = this.time.addEvent({
-      callback: this.updateScore,
-      callbackScope: this,
-      delay: 1000, // 1000 = 1 second
-      loop: true,
-    });
-
     //create animation objects
     this.anims.create({
       key: "dino-anims",
@@ -183,17 +183,14 @@ export default class Demo extends Phaser.Scene {
 
     this.physics.add.collider(player, ground);
 
-    var add = this.add;
-    var input = this.input;
-
-    // this.score = this.add.text.()
     socerTextDisplay = this.add.text(
       this.scale.width - 50,
       50,
       this.score.toString(),
       { fontFamily: "CustomFont" }
     );
-    const myTimeout = setInterval(this.updateScore, 1000);
+
+    this.physics.add.collider(player, catuses1, this.collidCactus, null, this);
   }
 
   update() {
@@ -215,8 +212,8 @@ export default class Demo extends Phaser.Scene {
       player.setVelocityY(-350);
     }
     if (cursors.down.isDown) {
-      player.setVelocityX(0);
-      player.play("dino-ducking-anims", true);
+      player.setTexture("ducking", 0);
+      // player.play("dino-ducking-anims");
     } else {
       player.play("dino-anims", true);
     }
@@ -228,13 +225,8 @@ export default class Demo extends Phaser.Scene {
     this.moveCatus(catuses3, 5);
 
     this.movePreta(preta);
-    this.updateScore();
 
     // this.physics.add.overlap(player, catuses1, this.collidCactus, null, this);
-  }
-  updateScore(): void {
-    this.score += 1;
-    socerTextDisplay.setText(this.score.toString());
   }
 
   moveCatus(catuses: Phaser.GameObjects.Image, speed: number): void {
@@ -259,11 +251,11 @@ export default class Demo extends Phaser.Scene {
 
   resetCatus(catuses: Phaser.GameObjects.Image): void {
     catuses.x = this.scale.width;
+    this.score += 10;
+    socerTextDisplay.setText(this.score.toString());
   }
-  collidCactus(
-    player: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody,
-    cactus: Phaser.GameObjects.Image
-  ) {
+  collidCactus(player: any, cactus: Phaser.GameObjects.Image) {
     this.physics.pause();
+    console.log(1);
   }
 }
