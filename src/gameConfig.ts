@@ -8,7 +8,7 @@ export default {
     default: "arcade",
     arcade: {
       gravity: { y: 300 },
-      debug: false,
+      debug: true,
     },
   },
   scale: {
@@ -16,5 +16,8 @@ export default {
     height: 630,
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
+  },
+  audio: {
+    disableWebAudio: true,
   },
 };
