@@ -1,0 +1,244 @@
+{
+	"gamePack": {
+		"files": [
+			{
+				"type": "image",
+				"key": "sunset-overlay",
+				"url": "/public/assets/sunset/sunset_overlay.png"
+			},
+			{
+				"type": "image",
+				"key": "sunset-bg",
+				"url": "/public/assets/sunset/sunset_bg.png"
+			},
+			{
+				"type": "image",
+				"key": "sunset-land",
+				"url": "/public/assets/sunset/sunset_land.png"
+			},
+			{
+				"type": "image",
+				"key": "sunset-first",
+				"url": "/public/assets/sunset/sunset_1.png"
+			},
+			{
+				"type": "image",
+				"key": "sunset-second",
+				"url": "/public/assets/sunset/sunset_2.png"
+			},
+			{
+				"type": "image",
+				"key": "sunset-third",
+				"url": "/public/assets/sunset/sunset_3.png"
+			},
+			{
+				"type": "image",
+				"key": "sunset-fourth",
+				"url": "/public/assets/sunset/sunset_4.png"
+			},
+			{
+				"type": "image",
+				"key": "sunrise-overlay",
+				"url": "/public/assets/sunrise/sunrise_overlay.png"
+			},
+			{
+				"type": "image",
+				"key": "sunrise-bg",
+				"url": "/public/assets/sunrise/sunrise_bg.png"
+			},
+			{
+				"type": "image",
+				"key": "sunrise-land",
+				"url": "/public/assets/sunrise/sunrise_land.png"
+			},
+			{
+				"type": "image",
+				"key": "sunrise-first",
+				"url": "/public/assets/sunrise/sunrise_1.png"
+			},
+			{
+				"type": "image",
+				"key": "sunrise-second",
+				"url": "/public/assets/sunrise/sunrise_2.png"
+			},
+			{
+				"type": "image",
+				"key": "sunrise-third",
+				"url": "/public/assets/sunrise/sunrise_3.png"
+			},
+			{
+				"type": "image",
+				"key": "sunrise-fourth",
+				"url": "/public/assets/sunrise/sunrise_4.png"
+			},
+			{
+				"type": "image",
+				"key": "night-overlay",
+				"url": "/public/assets/night/night_overlay.png"
+			},
+			{
+				"type": "image",
+				"key": "night-bg",
+				"url": "/public/assets/night/night_bg.png"
+			},
+			{
+				"type": "image",
+				"key": "night-land",
+				"url": "/public/assets/night/night_land.png"
+			},
+			{
+				"type": "image",
+				"key": "night-first",
+				"url": "/public/assets/night/night_1.png"
+			},
+			{
+				"type": "image",
+				"key": "night-second",
+				"url": "/public/assets/night/night_2.png"
+			},
+			{
+				"type": "image",
+				"key": "night-third",
+				"url": "/public/assets/night/night_3.png"
+			},
+			{
+				"type": "image",
+				"key": "night-fourth",
+				"url": "/public/assets/night/night_4.png"
+			},
+			{
+				"type": "image",
+				"key": "noon-overlay",
+				"url": "/public/assets/noon/noon_overlay.png"
+			},
+			{
+				"type": "image",
+				"key": "noon-bg",
+				"url": "/public/assets/noon/noon_bg.png"
+			},
+			{
+				"type": "image",
+				"key": "noon-land",
+				"url": "/public/assets/noon/noon_land.png"
+			},
+			{
+				"type": "image",
+				"key": "noon-first",
+				"url": "/public/assets/noon/noon_1.png"
+			},
+			{
+				"type": "image",
+				"key": "noon-second",
+				"url": "/public/assets/noon/noon_2.png"
+			},
+			{
+				"type": "image",
+				"key": "noon-third",
+				"url": "/public/assets/noon/noon_3.png"
+			},
+			{
+				"type": "image",
+				"key": "noon-fourth",
+				"url": "/public/assets/noon/noon_4.png"
+			},
+			{
+				"type": "spritesheet",
+				"key": "dino",
+				"url": "/public/assets/dino.png",
+				"frameConfig": {
+					"frameWidth": 150,
+					"frameHeight": 180
+				}
+			},
+			{
+				"type": "spritesheet",
+				"key": "dino-ducking",
+				"url": "/public/assets/dino_ducking.png",
+				"frameConfig": {
+					"frameWidth": 150,
+					"frameHeight": 92
+				}
+			},
+			{
+				"type": "image",
+				"key": "cactus-small",
+				"url": "/public/assets/cactus_small.png"
+			},
+			{
+				"type": "image",
+				"key": "cactus-big",
+				"url": "/public/assets/cactus_big.png"
+			},
+			{
+				"type": "image",
+				"key": "cactus-group",
+				"url": "/public/assets/cactus_group.png"
+			},
+			{
+				"type": "spritesheet",
+				"key": "ptera",
+				"url": "/public/assets/ptera.png",
+				"frameConfig": {
+					"frameWidth": 70,
+					"frameHeight": 110
+				}
+			},
+			{
+				"type": "spritesheet",
+				"key": "diamond",
+				"url": "/public/assets/diamond.png",
+				"frameConfig": {
+					"frameWidth": 76,
+					"frameHeight": 70
+				}
+			},
+			{
+				"type": "image",
+				"key": "pc-guide",
+				"url": "/public/assets/pc_guide.png"
+			},
+			{
+				"type": "image",
+				"key": "play",
+				"url": "/public/assets/play.png"
+			},
+			{
+				"type": "spritesheet",
+				"key": "sound",
+				"url": "/public/assets/sound.png",
+				"frameConfig": {
+					"frameWidth": 50,
+					"frameHeight": 50
+				}
+			},
+			{
+				"type": "image",
+				"key": "howtoplay",
+				"url": "/public/assets/howtoplay.png"
+			},
+			{
+				"type": "image",
+				"key": "scoreboard",
+				"url": "/public/assets/gameover.png"
+			},
+			{
+				"type": "spritesheet",
+				"key": "replay-over",
+				"url": "/public/assets/replay_over.png",
+				"frameConfig": {
+					"frameWidth": 92,
+					"frameHeight": 38
+				}
+			},
+			{
+				"type": "spritesheet",
+				"key": "howtoplay-over",
+				"url": "/public/assets/howtoplay_over.png",
+				"frameConfig": {
+					"frameWidth": 42,
+					"frameHeight": 38
+				}
+			}
+		]
+	}
+}
