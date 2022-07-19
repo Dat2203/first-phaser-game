@@ -7,6 +7,7 @@ var background: Phaser.GameObjects.TileSprite;
 var bg1: Phaser.GameObjects.TileSprite;
 var bg2: Phaser.GameObjects.TileSprite;
 var bg3: Phaser.GameObjects.TileSprite;
+var bg4: Phaser.GameObjects.TileSprite;
 var land: Phaser.GameObjects.TileSprite;
 var cursors: Phaser.Types.Input.Keyboard.CursorKeys;
 var catuses1: Phaser.Types.Physics.Arcade.ImageWithDynamicBody;
@@ -26,6 +27,7 @@ var playButton: Phaser.GameObjects.Image;
 var guide: Phaser.GameObjects.Image;
 var guidTween: Phaser.Tweens.Tween;
 var emitter: GameObjects.Particles.ParticleEmitter;
+var soundButton: Phaser.GameObjects.Sprite;
 
 export default class Demo extends Phaser.Scene {
   private DISTANCE: number = 400;
@@ -35,6 +37,8 @@ export default class Demo extends Phaser.Scene {
   private coinClaimed: number;
   private GAME_SPEED: number = 5;
   private isStart: boolean = false;
+  private isPlayAudio: boolean = true;
+  private isPause: boolean = false;
 
   constructor() {
     super("GameScene");
@@ -118,7 +122,12 @@ export default class Demo extends Phaser.Scene {
       frameWidth: 76,
       frameHeight: 70,
     });
+    this.load.spritesheet("sound", "assets/sound.png", {
+      frameWidth: 50,
+      frameHeight: 50,
+    });
 
+    //load audio
     this.load.audio("jumpSound", "./assets/sound/jump.mp3");
     this.load.audio("maintheme", "./assets/sound/main.ogg");
     this.load.audio("collect", "./assets/sound/heartSound.ogg");
@@ -130,22 +139,26 @@ export default class Demo extends Phaser.Scene {
     let ranDomMapIndex = Math.Between(0, 4);
     switch (ranDomMapIndex) {
       case 0:
-        land = this.add.tileSprite(0, 280, 2800, 400, "sunset-land");
+        land = this.add.tileSprite(0, 570, 2800, 1050, "sunset-land");
+
         // prettier-ignore
         bg2 = this.add.tileSprite(0,this.scale.height - 400,2800,400,"sunset_background").setDepth(0);
 
         // prettier-ignore
+        bg3 = this.add.tileSprite(0,this.scale.height - 400,2800,400,"sunset-bg3")
+        // prettier-ignore
         bg1 = this.add.tileSprite(0,this.scale.height - 400,2800,400,"sunset-bg2");
-
         // prettier-ignore
         background = this.add.tileSprite(0,this.scale.height - 400,2800,400,"sunset-bg1");
 
         break;
 
       case 1:
-        land = this.add.tileSprite(0, 280, 2800, 400, "night-land");
+        land = this.add.tileSprite(0, 570, 2800, 1050, "night-land");
         // prettier-ignore
         bg2 = this.add.tileSprite(0,this.scale.height - 400,2800,400,"night_background").setDepth(0);
+        // prettier-ignore
+        bg3 = this.add.tileSprite(0,this.scale.height - 400,2800,400,"night-bg3");
         // prettier-ignore
         bg1 = this.add.tileSprite(0,this.scale.height - 400,2800,400,"night-bg2");
         // prettier-ignore
@@ -153,7 +166,9 @@ export default class Demo extends Phaser.Scene {
         break;
 
       case 2:
-        land = this.add.tileSprite(0, 280, 2800, 400, "noon-land");
+        land = this.add.tileSprite(0, 570, 2800, 1050, "noon-land");
+        // prettier-ignore
+        bg3 = this.add.tileSprite(0,this.scale.height - 400,2800,400,"noon-bg3");
         // prettier-ignore
         bg2 = this.add.tileSprite(0,this.scale.height - 400,2800,400,"noon_background").setDepth(0);
         // prettier-ignore
@@ -163,9 +178,14 @@ export default class Demo extends Phaser.Scene {
         break;
 
       default:
-        land = this.add.tileSprite(0, 280, 2800, 400, "sunrise-land");
+        land = this.add.tileSprite(0, 570, 2800, 1050, "sunrise-land");
+
         // prettier-ignore
         bg2 = this.add.tileSprite(0,this.scale.height - 400,2800,400,"sunrise_background").setDepth(0);
+        // prettier-ignore
+        bg4 = this.add.tileSprite(0,this.scale.height - 400,2800,400,"sunrise-bg4");
+        // prettier-ignore
+        bg3 = this.add.tileSprite(0,this.scale.height - 400,2800,400,"sunrise-bg3");
         // prettier-ignore
         bg1 = this.add.tileSprite(0,this.scale.height - 400,2800,400,"sunrise-bg2");
         // prettier-ignore
@@ -192,6 +212,11 @@ export default class Demo extends Phaser.Scene {
     let collectSound = this.sound.add("collect");
     // mainthemeSound = this.sound.add("maintheme");
     // mainthemeSound.play();
+    soundButton = this.add
+      .sprite(this.scale.width - 50, 100, "sound")
+      .setInteractive({ useHandCursor: true })
+      .setScale(0.5)
+      .on("pointerdown", _this.handleSound, this);
 
     playButton = this.add
       .image(this.scale.width / 2, this.scale.height / 2, "play")
@@ -199,6 +224,12 @@ export default class Demo extends Phaser.Scene {
       .on("pointerdown", _this.onClickPlay, this);
 
     guide = this.add.image(200, 200, "guide");
+
+    pauseButton = this.add
+      .sprite(this.scale.width - 100, 100, "play")
+      .setInteractive({ useHandCursor: true })
+      .setScale(0.6)
+      .on("pointerdown", _this.handlePause, this);
 
     //catuses
     catuses1 = this.physics.add
@@ -351,6 +382,15 @@ export default class Demo extends Phaser.Scene {
 
     // handle clamid diamond
     this.physics.add.overlap(player, preta, this.gameOver, () => {}, this);
+    this.physics.add.overlap(
+      diamond,
+      cactusGroup,
+      () => {
+        diamond.x += 100;
+      },
+      () => {},
+      this
+    );
 
     this.physics.add.overlap(
       player,
@@ -373,10 +413,12 @@ export default class Demo extends Phaser.Scene {
 
   update() {
     if (!this.isStart) return;
+    if (this.isPause) return;
 
     land.tilePositionX += 5;
-    background.tilePositionX += 2;
-    bg1.tilePositionX += 1;
+    background.tilePositionX += 3;
+    bg1.tilePositionX += 2;
+    bg3.tilePositionX += 1;
     diamond.x -= 5;
 
     this.countDistance += 1;
@@ -505,5 +547,30 @@ export default class Demo extends Phaser.Scene {
     player.body.allowGravity = true;
     guidTween.play();
     playButton.destroy();
+  }
+  handleSound() {
+    if (!this.isStart) return;
+
+    this.isPlayAudio = !this.isPlayAudio;
+    console.log(this.isPlayAudio);
+
+    if (this.isPlayAudio) {
+      soundButton.setTexture("sound", 0);
+      this.sound.mute = false;
+    }
+    if (!this.isPlayAudio) {
+      soundButton.setTexture("sound", 1);
+      this.sound.mute = true;
+    }
+  }
+
+  handlePause() {
+    if (!this.isStart) return;
+
+    this.isPause = !this.isPause;
+    if (this.isPause) {
+    }
+    if (!this.isPause) {
+    }
   }
 }
